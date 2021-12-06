@@ -31,6 +31,11 @@ config = {
         'pdfs':pdf_files,
         'outfile':'combined_pdf.pdf'
         }
+     'convert_docx':{
+        'several':True,
+         'files':files_to_convert
+        },
+
     }
 
 def ps_to_pdf(psfile):
@@ -126,8 +131,32 @@ def convert_several_ps():
         
     return
 
+def docx_to_pdf(docxfile):
+    """
+    """
+    filename = docxfile[:docxfile.index('.')]
+    docx2pdf.convert(docxfile)
+    
+    return
+
+def convert_several_docx():
+    """
+    """
+    infiles = config['convert_docx']['several']
+
+    for docxfile in infiles:
+        docxfirstname = docxfile[:docxfile.index('.')]
+        pdffile = docxfirstname + '.pdf'
+        print(f'Start converting {docxfile}')
+        docx_to_pdf(docxfile)
+        print('Finished converting PDF')
+
+
 if config['convert_several_ps']['run']:
     convert_several_ps()
+    
+if config['convert_docx']['several']:
+    convert_several_docx()
 
 if config['combine_pdfs']['run']:
     combine_pdfs()
