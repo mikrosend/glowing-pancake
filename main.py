@@ -2,6 +2,7 @@ import os
 import subprocess
 
 import PyPDF2
+import docx2pdf
 
 files_to_convert = []
 pdf_files = []
